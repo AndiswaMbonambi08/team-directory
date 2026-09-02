@@ -21,6 +21,11 @@ def search_by_name(name):
     return "Not found"
 
 
+def filter_by_role(role):
+    entries = get_entries()
+    return [entry for entry in entries if role.lower() in entry.lower()]
+
+
 print("Team Directory Tool")
 print()
 
@@ -32,3 +37,9 @@ print("Total entries:", count_entries())
 print()
 print("Search result:")
 print(search_by_name("Andiswa"))
+
+print()
+print("Filter by role 'Software Developer Trainee':")
+for entry in filter_by_role("Software Developer Trainee"):
+    print(entry)
+    print()
