@@ -83,3 +83,45 @@ I added a pre-commit hook at .git/hooks/pre-commit that checks if .env is staged
 
 ## Stretch C: Pull request workflow
 Instead of merging feature/pr-demo locally, I pushed it to GitHub and opened an actual Pull Request, then used the Squash and merge option instead of a normal merge. Looking at git log --oneline --all --graph afterward, this showed up as one single clean commit on main, with no diamond shape and no separate merge commit, unlike Task 4 to 7 where a real merge created a visible diamond in the graph. Squash and merge is useful when you want a clean history and do not care about seeing every small commit from the feature branch, but you lose the detailed step by step history of what happened on that branch.
+
+## Assignment 1.2
+
+### Question 1 — Why fork, not branch, this time?
+
+In 1.1 I had write access to my own repo, so branching directly made sense. This time I don't have write access to my partner's repo, so I can't push a branch there directly — GitHub would just reject it. Forking gives me my own copy of their repo where I do have write access, and lets me open a Pull Request from my copy back into theirs. If I tried to clone their repo and push a branch straight to it, the push would fail with a permissions error, since I'm not a collaborator on it.
+
+### Question 2 — PR description: bad vs. good
+
+Bad version:
+
+"added search"
+
+Good version:
+
+What: Added a Search-TeamMembersByRole function to team.ps1 that lets a user search team members by role.
+Why: The directory only supported searching by name. Teams often need to find everyone in a given role (e.g. all Backend Developers), so this fills a real gap.
+How to verify: Run .\team.ps1, enter a role like "Developer" when prompted, and confirm it prints only matching entries.
+
+The second version is easier to review because it tells the reviewer exactly what changed, why it was needed, and how to test it themselves — they don't have to reverse-engineer the intent from the code alone.
+
+### Question 3 — Triaging review comments
+
+A blocking comment is something that must be fixed before merge — a bug, a missing case, or something that would break for other users. A nit/suggestion is a preference that doesn't affect correctness, like naming or formatting — nice to have, not required. A question is the reviewer asking for clarification, not necessarily asking for a change.
+
+My rule: if the comment points out something that would cause incorrect behavior or a real gap, I treat it as blocking. If it's about style, naming, or "could also do it this way," I treat it as a nit. If it's phrased as "why did you..." or "what happens if...", I treat it as a question until it's clear whether they expect a change.
+
+### Question 4 — When fetch beats pull
+
+After my partner's PR is merged into my repo, before pulling I'd run git fetch and check origin/main first, rather than pulling straight away. This lets me see exactly what changed and confirm the merge commit is there with my partner's name as the author, before it touches my local main. If I just ran pull blindly, I'd merge it in immediately without ever having looked at what I was about to bring in — fine most of the time, but risky if there's ever a conflict or something unexpected upstream.
+
+### Reflections
+
+**What you contributed, and why:** I added a Search-TeamMembersByRole function to my partner's team.ps1, letting a user search team members by role instead of only by name. I judged this genuinely useful rather than trivial because the existing tool only supported name search, and finding everyone in a given role (e.g. all Backend Developers) is a common real need as a team grows.
+
+**A comment you received that changed your code:** My partner left a blocking comment on my PR pointing out a duplicate/incomplete "## Assignemnt 1.2" section in my NOTES.md, caused by a merge from main that pulled in her own answers alongside mine. I fixed it by deleting the duplicate section and pushing a follow-up commit, keeping only my original complete answers.
+
+**A comment you gave that you stand by:** On my partner's PR, I left a blocking comment on her get_entries() function, noting that it would throw an unhandled exception if team.txt was missing or unreadable, and suggested wrapping it in a try/except with a clear error message instead. I stand by this because a real user hitting a missing file shouldn't see a raw traceback — that's a genuine reliability gap, not a style preference.
+
+**Fetch vs. pull, in practice:** In my original 1.1 folder, I ran git fetch before pulling and saw origin/main sitting one commit ahead of my local main. Checking the commit before pulling showed it was authored by mathabomohapi99-crypto, not me — concrete proof the contribution came from outside my own machine. Only after confirming that did I run git pull, which fast-forwarded cleanly. This made the value of fetch-before-pull real rather than theoretical: I actually saw what was about to change before it touched my branch, instead of trusting a blind pull.
+
+**Note on process:** I initially merged my partner's PR into my repo before completing my review, which reversed the intended order. I recovered by adding blocking and nit comments to the merged PR afterward, submitted as a "Comment" review since "Request changes" isn't available on a merged PR. Going forward, I'll wait to submit my review before clicking merge.
