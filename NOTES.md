@@ -42,3 +42,9 @@ f. "Changed line 47 of notes.md" talks about a line number instead of what chang
 ## Part 3, Task 2: What I saw with git diff
 1. Before I staged team.txt for the first time, git diff showed nothing at all. That is because the file was brand new and git was not tracking it yet, so there was nothing to compare.
 2. Before I staged the change to app.py where I made it read team.txt, git diff showed the exact lines I added(a blank line), then the code that opens team.txt and prints its contents. The old line with just the print statement was marked as removed and re-added because a newline was missing at the end of the file.
+
+## Task 4: Merge result
+When I merged feature/add-search into main, git said Fast-forward. I knew this because main had not changed since I created the branch, so git could just move the main pointer forward without needing a separate merge commit.
+
+## Task 7: What caused the conflict
+The conflict happened because I edited the same line of README.md on two different branches at the same time, once on conflict-branch and once directly on main. Git could not automatically decide which version was correct since both changed the exact same line. I looked at both versions and picked the wording that made the most sense for the final README, then removed the conflict markers and completed the merge.
