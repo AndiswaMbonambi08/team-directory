@@ -1,1 +1,2 @@
-# Team Directory Tool - Version 1
+# Team Directory Tool
+
