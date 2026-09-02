@@ -56,3 +56,21 @@ I would use a merge when I want the real history of parallel work to stay visibl
 
 ## Part 4: The rejected push
 When I tried to push after making a direct edit on GitHub's website, my push was rejected because the remote had a commit I did not have locally. I used git pull --rebase instead of force-pushing, because force-pushing would have overwritten the commit I made on GitHub and lost that work. Pull --rebase instead fetched that commit, then replayed my local commit on top of it, so both changes stayed in history without losing anything or creating a fake merge.
+
+## Reflection
+
+1. What made a commit high value in this project
+The commits I kept separate were things like adding the script, adding the data file, adding the search function, and setting up the gitignore. Each one did one clear thing, so if something broke later I could look back and know exactly which commit caused it. One thing I bundled together instead of splitting up was the small edit to app.py where I only added one comment line at the top. I did not make that its own giant explanation, I just committed it with a short message, because it was such a small change that splitting it further would not help anyone understand the project better.
+
+2. My merge vs rebase choice
+For the conflict task in Part 3, I used a merge, not a rebase. I chose this because I wanted the conflict and how I fixed it to actually stay visible in my history, the same way I said in Question 2. If I had used a rebase there instead, it would have looked like the conflict never happened, and that is not what the task wanted me to show.
+
+3. The rejected push
+When I edited README.md directly on GitHub and then tried to push a small local commit without pulling first, my push got rejected. Git told me the remote had a commit I did not have locally yet. I used git pull --rebase instead of forcing the push through, because forcing it would have overwritten the change I made on GitHub and lost that work completely. Pull --rebase pulled down that missing commit first, then placed my local commit on top of it, so nothing got lost and there was no fake merge commit either.
+
+4. Other things I learned 
+was that rebase can also cause a conflict, not just a merge. I thought conflicts only happened when merging two branches, but when I rebased my branch onto main, git still could not automatically combine the changes because the same part of README.md was edited in both places.
+
+Something I also noticed about myself while doing this assignment is that in the beginning I forgot to keep updating NOTES.md as I went along. I only wrote the Part 1 answers at the start and then got caught up in the terminal commands, so I had to go back later and add things like the diff observations and the merge notes after I had already done those steps instead of writing them down right away. Next time I would try to update NOTES.md straight after each task instead of leaving it for later.
+
+I also ran into a few small mistakes along the way that were not really about git itself, like typing commands with a missing space, using bash style commands like cat and touch in PowerShell where they do not work, and getting stuck in the git config pager and the vim editor without knowing how to exit them. These were not really git problems, but they taught me that the terminal itself has its own rules I still need to get more comfortable with.
