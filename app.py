@@ -6,3 +6,5 @@ with open("team.txt") as f:
     def count_entries():
         with open("team.txt") as f:
             return f.read().count("Name:")
+
+        print("Total entries:", count_entries())
