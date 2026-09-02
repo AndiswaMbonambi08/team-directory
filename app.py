@@ -17,3 +17,5 @@ with open("team.txt") as f:
                     if name in entry:
                         return entry
                     return "Not found"
+
+                print(search_by_name("Andiswa"))
