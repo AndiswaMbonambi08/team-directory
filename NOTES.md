@@ -80,3 +80,6 @@ I made 3 small messy commits on a branch called stretch-a-cleanup, with vague me
 
 ## Stretch B: Pre-commit hook
 I added a pre-commit hook at .git/hooks/pre-commit that checks if .env is staged before allowing a commit. To test it, I force-added .env with git add -f .env and tried to commit. The hook blocked the commit and printed my custom message, "Blocked: .env is staged, remove it before committing", instead of letting the commit go through. I then removed .env from staging with git restore --staged .env, and afterward it was ignored normally again.
+
+## Stretch C: Pull request workflow
+Instead of merging feature/pr-demo locally, I pushed it to GitHub and opened an actual Pull Request, then used the Squash and merge option instead of a normal merge. Looking at git log --oneline --all --graph afterward, this showed up as one single clean commit on main, with no diamond shape and no separate merge commit, unlike Task 4 to 7 where a real merge created a visible diamond in the graph. Squash and merge is useful when you want a clean history and do not care about seeing every small commit from the feature branch, but you lose the detailed step by step history of what happened on that branch.
