@@ -48,3 +48,8 @@ When I merged feature/add-search into main, git said Fast-forward. I knew this b
 
 ## Task 7: What caused the conflict
 The conflict happened because I edited the same line of README.md on two different branches at the same time, once on conflict-branch and once directly on main. Git could not automatically decide which version was correct since both changed the exact same line. I looked at both versions and picked the wording that made the most sense for the final README, then removed the conflict markers and completed the merge.
+
+## Task 9: Merge vs rebase graph
+Comparing the two graphs in git log --oneline --all --graph, the merge from Task 4 to 7 shows a diamond shape, since main and the feature branch both had separate commits that later joined back together. The rebase in Task 9 shows a straight line instead, since rebase moved my branch's commits to sit right on top of main's latest commit before merging.
+
+I would use a merge when I want the real history of parallel work to stay visible, for example in a shared team branch. I would use a rebase when I want a clean, simple history for a small personal feature branch that nobody else is working on.
