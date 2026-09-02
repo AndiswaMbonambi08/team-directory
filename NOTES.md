@@ -41,4 +41,4 @@ f. "Changed line 47 of notes.md" talks about a line number instead of what chang
 
 ## Part 3, Task 2: What I saw with git diff
 1. Before I staged team.txt for the first time, git diff showed nothing at all. That is because the file was brand new and git was not tracking it yet, so there was nothing to compare.
-2. Before I staged the change to app.py where I made it read team.txt, git diff showed the exact lines I added, because app.py was already being tracked from an earlier commit.
+2. Before I staged the change to app.py where I made it read team.txt, git diff showed the exact lines I added(a blank line), then the code that opens team.txt and prints its contents. The old line with just the print statement was marked as removed and re-added because a newline was missing at the end of the file.
