@@ -7,3 +7,4 @@ Python 3 must be installed to run this tool.
 Run the script with:
 python app.py
 
+Last update was on github
