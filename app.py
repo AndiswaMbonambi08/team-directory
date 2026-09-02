@@ -1,3 +1,4 @@
+# Entry point for the team directory tool
 print("Team Directory Tool")
 
 with open("team.txt") as f:
