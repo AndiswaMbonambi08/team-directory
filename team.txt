@@ -1,0 +1,11 @@
+Name: Andiswa Mbonambi
+Role: Software Developer Trainee
+Email: andiswambonambi@gmail.com
+
+Name: Kwanele Mofokeng
+Role: Software Developer Trainee
+Email: kwanelem@gmail.com
+
+Name: Zane Malope
+Role: Software Developer Trainee
+Email: zanemalope@gmail.com
