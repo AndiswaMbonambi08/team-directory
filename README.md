@@ -11,3 +11,6 @@ Run the script with:
 python app.py
 
 Last update was on github
+
+## Notes
+This section was added through a Pull Request instead of a local merge.
