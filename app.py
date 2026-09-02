@@ -2,9 +2,16 @@
 
 
 def get_entries():
-    with open("team.txt") as f:
-        content = f.read()
-        return content.strip().split("\n\n")
+    try:
+        with open("team.txt") as f:
+            content = f.read()
+            return content.strip().split("\n\n")
+    except FileNotFoundError:
+        print("Error: team.txt not found. Returning an empty team list.")
+        return []
+    except OSError as e:
+        print(f"Error: could not read team.txt ({e}). Returning an empty team list.")
+        return []
 
 
 def count_entries():
@@ -21,9 +28,9 @@ def search_by_name(name):
     return "Not found"
 
 
-def filter_by_role(role):
+def filter_by_role(role_query):
     entries = get_entries()
-    return [entry for entry in entries if role.lower() in entry.lower()]
+    return [entry for entry in entries if role_query.lower() in entry.lower()]
 
 
 print("Team Directory Tool")
