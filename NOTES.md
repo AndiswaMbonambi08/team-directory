@@ -53,3 +53,6 @@ The conflict happened because I edited the same line of README.md on two differe
 Comparing the two graphs in git log --oneline --all --graph, the merge from Task 4 to 7 shows a diamond shape, since main and the feature branch both had separate commits that later joined back together. The rebase in Task 9 shows a straight line instead, since rebase moved my branch's commits to sit right on top of main's latest commit before merging.
 
 I would use a merge when I want the real history of parallel work to stay visible, for example in a shared team branch. I would use a rebase when I want a clean, simple history for a small personal feature branch that nobody else is working on.
+
+## Part 4: The rejected push
+When I tried to push after making a direct edit on GitHub's website, my push was rejected because the remote had a commit I did not have locally. I used git pull --rebase instead of force-pushing, because force-pushing would have overwritten the commit I made on GitHub and lost that work. Pull --rebase instead fetched that commit, then replayed my local commit on top of it, so both changes stayed in history without losing anything or creating a fake merge.
