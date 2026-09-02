@@ -77,3 +77,6 @@ I also ran into a few small mistakes along the way that were not really about gi
 
 ## Stretch A: Interactive rebase cleanup
 I made 3 small messy commits on a branch called stretch-a-cleanup, with vague messages like wip and fix typo. Using git rebase -i HEAD~3, I squashed all 3 into one clean commit with a proper message. Before, git log showed 3 separate small commits, after the rebase it showed just 1 commit combining all the changes. This made the history much easier to read since a reviewer would not need to look at 3 tiny steps that were really just one small fix.
+
+## Stretch B: Pre-commit hook
+I added a pre-commit hook at .git/hooks/pre-commit that checks if .env is staged before allowing a commit. To test it, I force-added .env with git add -f .env and tried to commit. The hook blocked the commit and printed my custom message, "Blocked: .env is staged, remove it before committing", instead of letting the commit go through. I then removed .env from staging with git restore --staged .env, and afterward it was ignored normally again.
