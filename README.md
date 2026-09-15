@@ -13,7 +13,8 @@ cd team-directory
 Run the script with:
 python app.py
 
-Last update was on github
+## Known limitations
+The search and filter examples in app.py are hardcoded ("Andiswa" and "Software Developer Trainee") rather than taken as command-line arguments. Running the script always searches/filters for these fixed values — this is a demo script, not a general-purpose lookup tool yet.
 
-## Notes
-This section was added through a Pull Request instead of a local merge.
+## Contribution guide
+Open a pull request against main. Keep functions small and add a comment explaining any non-obvious "why," not what the code already shows.
