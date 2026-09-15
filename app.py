@@ -19,6 +19,11 @@ def count_entries():
 
 # record in team.txt. Returns [] on any read failure so callers (count/search/filter)
 def search_by_name(name):
+    """
+    Searches team entries for a case-insensitive substring match against `name`.
+    Returns the first matching entry (str), or the string "Not found" if no
+    entry matches — callers should check for this exact string, not a falsy value.
+    """
     entries = get_entries()
     
 # can treat "no data" and "file problem" the same way, without crashing the CLI.
