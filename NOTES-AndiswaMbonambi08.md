@@ -126,6 +126,72 @@ After my partner's PR is merged into my repo, before pulling I'd run git fetch a
 
 **Note on process:** I initially merged my partner's PR into my repo before completing my review, which reversed the intended order. I recovered by adding blocking and nit comments to the merged PR afterward, submitted as a "Comment" review since "Request changes" isn't available on a merged PR. Going forward, I'll wait to submit my review before clicking merge.
 
+## Assignment 3.2 — Part 2 (Practice)
+
+### Task 1 — Commented code
+
+function signup(email, password) {
+  if (!email.includes('@')) return { error: 'invalid' };
+  if (password.length < 8) return { error: 'weak' };
+
+  // 10 rounds balances hashing cost vs. login latency; raise this if
+  // hardware improves enough to make brute-forcing 10 rounds cheap.
+  const hash = bcrypt.hashSync(password, 10);
+
+  const existing = db.users.find(u => u.email === email);
+  if (existing) return { error: 'exists' };
+
+  // verified starts false — account is created immediately but can't
+  // log in until the confirmation link below is clicked.
+  const user = db.users.insert({ email, hash, verified: false });
+  sendEmail(user.email, 'confirm-token-' + user.id);
+  return { id: user.id };
+}
+
+### Task 2 — README excerpt
+
+## Setup
+1. Install dependencies: npm install
+2. Ensure db is configured and reachable
+3. Ensure an email-sending service is configured for sendEmail
+
+## Usage
+Call signup(email, password) with a plain-text email and password.
+- Returns { id } on success — the new user's ID.
+- Returns { error: 'invalid' } if the email has no @.
+- Returns { error: 'weak' } if the password is under 8 characters.
+- Returns { error: 'exists' } if the email is already registered.
+
+A confirmation email is sent automatically; the account is unverified until that link is used.
+
+### Task 3 — Endpoint doc
+
+### POST /api/signup
+Creates a new user account and sends a confirmation email.
+
+**Auth:** None required (public endpoint)
+
+**Request body**
+{ "email": "user@example.com", "password": "at-least-8-chars" }
+
+**Responses**
+- 200 OK — { "id": "<user_id>" }
+- 400 Bad Request — { "error": "invalid" } (malformed email), { "error": "weak" } (password too short), or { "error": "exists" } (email already registered)
+
+Note: account is created with verified: false; login should be blocked until the emailed confirmation link is used.
+
+### Task 4 — ADR draft
+
+## Title: Reject signup on existing email instead of merging accounts
+
+**Status:** Accepted
+
+**Context:** When a signup request comes in for an email that already has an account, we need to decide what happens — merge/update the existing record, silently overwrite it, or reject the request.
+
+**Decision:** Reject the signup with { error: 'exists' } and leave the existing account untouched.
+
+**Consequences:** Simple and predictable — no risk of one signup attempt silently overwriting another user's password hash or verification state. Trade-off: a legitimate user who forgot they already signed up gets an error instead of a helpful "log in instead" or "reset password" flow; that UX gap would need to be handled client-side.
+
 ## Assignment 3.2
 
 ### Question 1 — Beyond the core four
