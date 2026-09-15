@@ -1,4 +1,4 @@
-# Entry point for the team directory tool
+
 
 
 def get_entries():
@@ -13,14 +13,15 @@ def get_entries():
         print(f"Error: could not read team.txt ({e}). Returning an empty team list.")
         return []
 
-
+# Reads and returns team entries as a list of strings, one per blank-line-separated
 def count_entries():
     return len(get_entries())
 
-
+# record in team.txt. Returns [] on any read failure so callers (count/search/filter)
 def search_by_name(name):
     entries = get_entries()
-
+    
+# can treat "no data" and "file problem" the same way, without crashing the CLI.
     for entry in entries:
         if name.lower() in entry.lower():
             return entry
