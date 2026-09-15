@@ -138,3 +138,16 @@ Missing, should be there: app.py, inside get_entries() — the two except blocks
 
 ### Question 3 — What makes a decision ADR-worthy
 The real decision: splitting team.txt entries on blank lines ("\n\n") instead of using a structured format like CSV or JSON. That's worth an ADR because it isn't obvious — CSV or JSON is the more conventional choice for structured team data, and someone extending this tool later might reach for csv.reader without realizing the file format assumes double-newline-separated blocks. A routine detail like using .lower() for case-insensitive search doesn't need an ADR, there's no real alternative anyone would reasonably reach for instead, it's just the obvious way to do it.
+
+### NOTES.md Updates
+
+1. Documenting the throwaway QuickNotes function first made me look for the same patterns in app.py before I even reread it, I already knew what a "restates the code" comment and a missing "why" comment looked like.
+2. The comment I flagged as unnecessary (the file-level "Entry point" comment) was easier to remove than expected — it wasn't propping up any explanation elsewhere in the file.
+3. After writing a real ADR, I'd document fewer decisions than I originally thought most of app.py's other choices (like .lower() for matching) are the obvious default, not a real fork in the road.
+
+Links:
+README: https://github.com/AndiswaMbonambi08/team-directory/blob/main/README.md
+  
+ADR: https://github.com/AndiswaMbonambi08/team-directory/blob/main/docs/decisions/0001-plain-text-storage.md
+  
+app.py: https://github.com/AndiswaMbonambi08/team-directory/blob/main/app.py
