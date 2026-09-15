@@ -125,3 +125,16 @@ After my partner's PR is merged into my repo, before pulling I'd run git fetch a
 **Fetch vs. pull, in practice:** In my original 1.1 folder, I ran git fetch before pulling and saw origin/main sitting one commit ahead of my local main. Checking the commit before pulling showed it was authored by mathabomohapi99-crypto, not me — concrete proof the contribution came from outside my own machine. Only after confirming that did I run git pull, which fast-forwarded cleanly. This made the value of fetch-before-pull real rather than theoretical: I actually saw what was about to change before it touched my branch, instead of trusting a blind pull.
 
 **Note on process:** I initially merged my partner's PR into my repo before completing my review, which reversed the intended order. I recovered by adding blocking and nit comments to the merged PR afterward, submitted as a "Comment" review since "Request changes" isn't available on a merged PR. Going forward, I'll wait to submit my review before clicking merge.
+
+## Assignment 3.2
+
+### Question 1 — Beyond the core four
+My README currently has Purpose, Setup, and Usage, but no Contribution guide. The section I'd add is Known limitations: app.py hardcodes the search term ("Andiswa") and the filter term ("Software Developer Trainee") directly in the script instead of taking them as arguments. Someone cloning this expecting a general-purpose directory tool would run it, get one fixed result, and have no way to search for anything else without editing the source. Leaving that undocumented means a new user assumes the tool is broken rather than realizing it's a demo script wired to fixed examples on purpose.
+
+### Question 2 — Comment audit
+Shouldn't be there: app.py, line 1 — "# Entry point for the team directory tool". This restates what's already obvious from the file being run directly with print() statements at module level, it adds nothing a reader doesn't get from reading the next line.
+
+Missing, should be there: app.py, inside get_entries() — the two except blocks that print an error and return [] instead of letting the program crash. There's no comment explaining why silent degradation was chosen over raising the exception, which is exactly the kind of "why" a future reader has to guess at right now.
+
+### Question 3 — What makes a decision ADR-worthy
+The real decision: splitting team.txt entries on blank lines ("\n\n") instead of using a structured format like CSV or JSON. That's worth an ADR because it isn't obvious — CSV or JSON is the more conventional choice for structured team data, and someone extending this tool later might reach for csv.reader without realizing the file format assumes double-newline-separated blocks. A routine detail like using .lower() for case-insensitive search doesn't need an ADR, there's no real alternative anyone would reasonably reach for instead, it's just the obvious way to do it.
