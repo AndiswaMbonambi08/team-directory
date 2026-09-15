@@ -12,4 +12,4 @@ jobs:
       - name: Check required files exist
         run: |
           test -f README.md
-          test -f NOTES.md
+          test -f NOTES-AndiswaMbonambi08.md
