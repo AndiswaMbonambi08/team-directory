@@ -6,8 +6,10 @@ A simple command line tool that reads a list of team members from a text file an
 
 ## Setup
 Python 3 must be installed to run this tool.
+git clone https://github.com/AndiswaMbonambi08/team-directory.git
+cd team-directory
 
-## How to run
+## Usage
 Run the script with:
 python app.py
 
